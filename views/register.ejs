@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+    <div>
+        <div class="container w-50 pt-5">
+            <div class="card p-5">
+                <h1 class="text-center pb-4"> <%= data._id ? "Хэрэглэгч засварлах" : "Бүртгүүлэх" %> </h1>
+                <form action= "<% if(data._id ? "/editUser" : "/register") %>" method="POST">
+                    <input type="hidden" id="id" name="id" value = "<%= data._id %>">
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Нэр</label>
+                        <input type="text" id="username" class="form-control" name="username" value = <%= data.username %>>
+                    </div>
+                    <% if(!data._id) { %>
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Нууц үг</label>
+                        <input type="password" id="password" class="form-control" name="password" value = <%= data.password %>>
+                    </div>
+                    <%} %>
+                    <% if(data._id) { %>
+                    <div class="form-check mb-4">
+                        <input type="checkbox" id="isOperator" class="form-check-input" name="isOperator" <%= data.isOperator === true ? 'checked' : '' %>>
+                        <label class="form-check-label">Оператор эрхтэй эсэх</label>
+                    </div>
+                    <%} else {%>
+                    <div class="form-check mb-4">
+                        <input  type="checkbox" id="isAdmin" class="form-check-input" name="isAdmin">
+                        <label class="form-check-label">Админ эсэх</label>
+                    </div>
+                    <%}%>
+                    <button type="submit" class="btn btn-primary btn-block mb-4"><%= data._id ? "Хадгалах" : "Бүртгүүлэх" %></button>
+                    <% if(!data._id) { %>
+                    <div class="text-center">
+                        <p>Бүртгэлтэй юу? <a href="/login">Нэвтрэх</a></p>
+                    </div>
+                    <%} %>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <%- include('partials/footer') %>

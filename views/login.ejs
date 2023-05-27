@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+    <div class="container w-50 pt-5">
+        <div class="card p-5">
+            <h1 class="text-center pb-4">Нэвтрэх</h1>
+            <form action="/login" method="POST">
+                <div class="form-outline mb-4">
+                    <label class="form-label">Нэр</label>
+                    <input type="text" id="username" class="form-control" name="username">
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label">Нууц үг</label>
+                    <input type="password" id="password" class="form-control" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Нэвтрэх</button>
+                <div class="text-center">
+                    <p>Бүртгэлгүй юу? <a href="/register">Бүртгүүлэх</a></p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <%- include('partials/footer') %>

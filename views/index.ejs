@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+    <%- text %>
+    <div class="d-flex justify-content-between mt-2">
+        <h2>Бүтээгдэхүүнүүд</h2>
+        <% if(user.isOperator) { %>
+        <button class="btn" style="width: 150px; background-color: #2596be; color: #f3f1f1" onclick="window.location.href = 'add';">Нэмэх</button>
+        <%} %>
+    </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Код</th>
+                    <th scope="col">Нэр</th>
+                    <th scope="col">Үнэ</th>
+                    <% if(user.isOperator) { %>
+                    <th scope="col" colspan="2">Үйлдэл</th>
+                    <%} %>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach((product,index) => { %>
+                    <tr>
+                        <th scope="row"><%= index+1 %></th>
+                        <td><%= product.code %></td>
+                        <td><%= product.name %></td>
+                        <td><%= product.price %></td>
+                        <% if(user.isOperator) { %>
+                        <td>
+                            <form action= "/editProduct" method="GET">
+                                <input type="hidden" id="id" name="id" value= "<%= product._id %>">
+                                <button type="submit" class="btn btn-link"><i class="bi bi-pencil-fill text-warning"></i></button></i>
+                            </form>
+                        </td>
+                        <td>
+                            <form action= "/deleteProduct" method="POST">
+                                <input type="hidden" id="id" name="id" value= "<%= product._id %>">
+                                <button type="submit" class="btn btn-link"><i class="bi bi-x-lg text-danger"></i></button>
+                            </form>
+                        </td>
+                        <%} %>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+<%- include('partials/footer') %>

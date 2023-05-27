@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+    <%- text %>
+    <h2>Хэрэглэгчдийн жагсаалт</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Нэр</th>
+                    <th scope="col">Админ эсэх</th>
+                    <th scope="col">Оператор эрхтэй эсэх</th>
+                    <th scope="col" colspan="2">Үйлдэл</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% datas.forEach((data,index) => { %>
+                    <tr>
+                        <th scope="row"><%= index+1 %></th>
+                        <td><%= data.username %></td>
+                        <td>
+                            <% if(data.isAdmin){ %>
+                            <p class="text-success">Тийм</p>
+                            <% } else {%>
+                            <p class="text-danger">Үгүй</p>
+                            <% } %>
+                        </td>
+                        <td>
+                            <% if(!data.isAdmin){ %>
+                            <% if(data.isOperator){ %>
+                            <p class="text-success">Тийм</p>
+                            <% } else {%>
+                            <p class="text-danger">Үгүй</p>
+                            <% } %>
+                            <% } %>
+                        </td>
+                        <td>
+                            <form action= "/editUser" method="GET">
+                                <input type="hidden" id="id" name="id" value= "<%= data._id %>">
+                                <button type="submit" class="btn btn-link"><i class="bi bi-pencil-fill text-warning"></i></button></i>
+                            </form>
+                        </td>
+                        <td>
+                            <form action= "/deleteUser" method="POST">
+                                <input type="hidden" id="id" name="id" value= "<%= data._id %>">
+                                <button type="submit" class="btn btn-link"><i class="bi bi-x-lg text-danger"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+<%- include('partials/footer') %>
